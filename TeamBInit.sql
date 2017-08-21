@@ -2,6 +2,7 @@ drop user if exists 'teamB'@'localhost';
 
 create user 'teamB'@'localhost' identified by 'teamB';
 
+grant select, insert, update, delete, create, create view, drop, execute, references on *.* to 'teamB'@'localhost';
 create database BugReportTeamB;
 
 use BugReportTeamB;
