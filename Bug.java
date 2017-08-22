@@ -4,30 +4,66 @@ import java.lang.Enum;
 public class Bug {
 
     enum StatusType {
-        Pending,    // The initial state
-        Approved,   // Once the Bug has been approved
-        Assigned,   // A person has been assigned to fix the bug.
-        Completed,  // The fix to the bug has been completed
-        Closed      // The fix to the bug has been accepted
+        PENDING, // The initial state
+        APPROVED, // Once the Bug has been approved
+        ASSIGNED, // A person has been assigned to fix the bug.
+        COMPLETED, // The fix to the bug has been completed
+        CLOSED      // The fix to the bug has been accepted
     };
 
     enum PriorityType {
-        High, Medium, Low
+        HIGH, MEDIUM, LOW
     };
-    
+
     private Integer id = 0;
-    private StatusType status = StatusType.Pending;
-    private PriorityType priority = PriorityType.Low;
+    private StatusType status = StatusType.PENDING;
+    private PriorityType priority = PriorityType.LOW;
     private String application = "";
     private String assignee = "";
     private String summary = "";
     private String detailedDesc = "";
     private String fixDesc = "";
-    
+
     // Default Constructor
     Bug() {
     }
-    
+
+    Bug(Integer id,
+            StatusType status,
+            PriorityType priority,
+            String application,
+            String assignee,
+            String summary,
+            String detailedDesc,
+            String fixDesc) {
+        setId(id);
+        setStatus(status);
+        setPriority(priority);
+        setApplication(application);
+        setAssignee(assignee);
+        setSummary(summary);
+        setDetailedDesc(detailedDesc);
+        setFixDesc(fixDesc);
+    }
+
+    Bug(Integer id,
+            String status,
+            String priority,
+            String application,
+            String assignee,
+            String summary,
+            String detailedDesc,
+            String fixDesc) {
+        setId(id);
+        setStatus(status);
+        setPriority(priority);
+        setApplication(application);
+        setAssignee(assignee);
+        setSummary(summary);
+        setDetailedDesc(detailedDesc);
+        setFixDesc(fixDesc);
+    }
+
     Integer getId() {
         return this.id;
     }
@@ -38,6 +74,10 @@ public class Bug {
 
     PriorityType getPriority() {
         return this.priority;
+    }
+
+    String getApplication() {
+        return this.application;
     }
 
     String getAssignee() {
@@ -52,10 +92,11 @@ public class Bug {
         return this.detailedDesc;
     }
 
-    String getFixDescr() {
+    String getFixDesc() {
         return this.fixDesc;
     }
 
+    // this should only be called by the database utility
     void setId(Integer id) {
         this.id = id;
     }
@@ -64,15 +105,27 @@ public class Bug {
         this.status = status;
     }
 
+    void setStatus(String status) {
+        this.status = StatusType.valueOf(status);
+    }
+
     void setPriority(PriorityType priority) {
         this.priority = priority;
+    }
+
+    void setPriority(String priority) {
+        this.priority = PriorityType.valueOf(priority);
+    }
+
+    void setApplication(String application) {
+        this.application = application;
     }
 
     void setAssignee(String assignee) {
         this.assignee = assignee;
     }
 
-    void setsummary(String summary) {
+    void setSummary(String summary) {
         this.summary = summary;
     }
 
@@ -82,5 +135,18 @@ public class Bug {
 
     void setFixDesc(String fixDesc) {
         this.fixDesc = fixDesc;
+    }
+
+    String toFormattedString() {
+        String returnString
+                = "ID = " + getId()
+                + "\nStatus = " + this.status.toString()
+                + "\nPriority = " + this.priority.toString()
+                + "\nApplicatin = " + this.application
+                + "\nAssignee = " + this.assignee
+                + "\nSummary = " + this.summary
+                + "\nDetailed Description = " + this.detailedDesc
+                + "\nFix Description = " + this.fixDesc;
+        return returnString;
     }
 }

@@ -32,9 +32,9 @@ insert into Bugs values
 
 (100, 
 
-"PENDING", 
+"Pending", 
 
-"LOW", 
+"Low", 
 
 "App1", 
 
@@ -51,9 +51,9 @@ insert into Bugs values
 
 (101, 
 
-"APPROVED", 
+"Appoved", 
 
-"HIGH", 
+"High", 
 
 "App2", 
 
